@@ -4,7 +4,7 @@ import datetime
 
 win = Tk()
 win.title("Pogoda Program")
-win.geometry("500x300")
+win.geometry("600x300")
 win.resizable(False, False)  # Заборона зміни розміру вікна
 def get_into():
     info1 = ent.get()
@@ -27,8 +27,10 @@ def get_into():
 
         days_ahead = (target_weekday - today_weekday) % 7
         target_date = today + datetime.timedelta(days=days_ahead)
+        print(target_date)
 
-        nap.config("Дата: " + target_date.strftime('%d.%m.%Y')) #Можливість змінювати поле тексту
+        nap3.config(text="Дата: " + target_date.strftime('%d.%m.%Y'))  # Оновлення тексту лейбла
+
     print(into2 + " " + info1 +":"+ info3)
 nap = Label(win, font=('Comic Sans MS', 20), text="Оберіть день тижня")
 nap.place(relx=0.04, rely=0.1)
@@ -55,7 +57,7 @@ but.place(relx=0.07, rely=0.65)
 nap3 = Label(win, font=('Comic Sans MS', 20), text="Дата: ")
 nap3.place(relx=0.6, rely=0.1)
 
-options = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота", "Неділя"]
+options = ["Понеділок", "Вівторок", "Середа", "Четвер", "Пʼятниця", "Субота", "Неділя"]
 # Створюємо Combobox
 combo = ttk.Combobox(win, values=options, font=('Comic Sans MS', 14), width=15)
 combo.set("Оберіть варіант")  # Початковий текст
