@@ -5,7 +5,9 @@ import datetime
 win = Tk()
 win.title("Pogoda Program")
 win.geometry("600x300")
-win.resizable(False, False)  # Заборона зміни розміру вікна
+win.resizable(False, False)
+win.configure(bg='#f0f8ff')  # світлий фон
+
 def get_into():
     info1 = ent.get()
     into2 = combo.get()
@@ -15,7 +17,7 @@ def get_into():
         "Вівторок": 1,
         "Середа": 2,
         "Четвер": 3,
-        "Пʼятниця": 4,
+        "П'ятниця": 4,
         "Субота": 5,
         "Неділя": 6
     }
@@ -27,48 +29,45 @@ def get_into():
 
         days_ahead = (target_weekday - today_weekday) % 7
         target_date = today + datetime.timedelta(days=days_ahead)
-        print(target_date)
+        nap3.config(text="Дата: " + target_date.strftime('%d.%m.%Y'))
 
-        nap3.config(text="Дата: " + target_date.strftime('%d.%m.%Y'))  # Оновлення тексту лейбла
+    print(into2 + " " + info1 + ":" + info3)
 
-    print(into2 + " " + info1 +":"+ info3)
-nap = Label(win, font=('Comic Sans MS', 20), text="Оберіть день тижня")
+# Заголовки
+nap = Label(win, font=('Comic Sans MS', 18), text="Оберіть день тижня", bg='#f0f8ff')
 nap.place(relx=0.04, rely=0.1)
 
-nap2 = Label(win, font=('Comic Sans MS', 20), text="Оберіть кількість часу")
+nap2 = Label(win, font=('Comic Sans MS', 18), text="Оберіть кількість часу", bg='#f0f8ff')
 nap2.place(relx=0.04, rely=0.3)
 
-ent = Entry(win, font=('Comic Sans MS', 20), width=4)
+# Entry для годин і хвилин
+ent = Entry(win, font=('Comic Sans MS', 18), width=4)
 ent.place(relx=0.1, rely=0.45)
 
-ent2 = Entry(win, font=('Comic Sans MS', 20), width=4)
+ent2 = Entry(win, font=('Comic Sans MS', 18), width=4)
 ent2.place(relx=0.3, rely=0.45)
 
-nap2 = Label(win, font=('Comic Sans MS', 20), text="год")
-nap2.place(relx=0.22, rely=0.45)
+Label(win, font=('Comic Sans MS', 18), text="год", bg='#f0f8ff').place(relx=0.2, rely=0.45)
+Label(win, font=('Comic Sans MS', 18), text="хв", bg='#f0f8ff').place(relx=0.42, rely=0.45)
 
-nap2 = Label(win, font=('Comic Sans MS', 20), text="хв")
-nap2.place(relx=0.44, rely=0.45)
-
-but = Button(win, text="Провести заміри", font=('Comic Sans MS', 20), width=13, height=1, command=get_into)
+# Кнопка
+but = Button(win, text="Провести заміри", font=('Comic Sans MS', 18), width=16, height=1, command=get_into, bg='#add8e6')
 but.place(relx=0.07, rely=0.65)
 
-#result
-nap3 = Label(win, font=('Comic Sans MS', 20), text="Дата: ")
-nap3.place(relx=0.6, rely=0.1)
+# Label для виводу дати (праворуч!)
+nap3 = Label(win, font=('Comic Sans MS', 18), text="Дата: ", bg='#f0f8ff')
+nap3.place(relx=0.65, rely=0.1)
 
-options = ["Понеділок", "Вівторок", "Середа", "Четвер", "Пʼятниця", "Субота", "Неділя"]
-# Створюємо Combobox
+# Combobox
+options = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота", "Неділя"]
 combo = ttk.Combobox(win, values=options, font=('Comic Sans MS', 14), width=15)
-combo.set("Оберіть варіант")  # Початковий текст
+combo.set("Оберіть варіант")
 combo.place(relx=0.1, rely=0.22)
 
-# Функція при виборі
 def on_select(event):
     q = combo.get()
     print(f"Ви вибрали: {q}")
 
-# Прив'язуємо подію вибору
 combo.bind("<<ComboboxSelected>>", on_select)
 
 win.mainloop()
